@@ -20,13 +20,13 @@
         android:id="@+id/idRLHome"
         android:visibility="visible"
         >
+
         <ImageView
+            android:id="@+id/idIVBack"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@color/black_shade_1"
-            android:id="@+id/idIVBack"
-            />
+            android:src="@color/black_shade_1" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -139,6 +139,20 @@
             android:layout_marginBottom="51dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="169dp"
+            android:layout_marginTop="442dp"
+            android:layout_marginEnd="154dp"
+            android:layout_marginBottom="241dp"
+            android:text="Button" />
 
 
     </RelativeLayout>
