@@ -8,12 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Widget.BarcodeTemplate.AppWidget.Container" parent="android:Widget">
+    <style name="Widget.mobileweatherapp.AppWidget.Container" parent="android:Widget">
         <item name="android:id">@android:id/background</item>
         <item name="android:background">?android:attr/colorBackground</item>
     </style>
 
-    <style name="Widget.BarcodeTemplate.AppWidget.InnerView" parent="android:Widget">
+    <style name="Widget.mobileweatherapp.AppWidget.InnerView" parent="android:Widget">
         <item name="android:background">?android:attr/colorBackground</item>
         <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>

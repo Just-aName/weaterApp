@@ -1,4 +1,4 @@
-package com.vsb.kru13.barcodetemplate;
+package com.vsb.kol0482.mobileweatherapp;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
@@ -9,14 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import com.vsb.kru13.barcodetemplate.databinding.WeatherConfigureBinding;
+import com.vsb.kol0482.mobileweatherapp.databinding.WeatherConfigureBinding;
 
 /**
  * The configuration screen for the {@link Weather Weather} AppWidget.
  */
 public class WeatherConfigureActivity extends Activity {
 
-    private static final String PREFS_NAME = "com.vsb.kru13.barcodetemplate.Weather";
+    private static final String PREFS_NAME = "com.vsb.kol0482.mobileweatherapp.Weather";
     private static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetText;

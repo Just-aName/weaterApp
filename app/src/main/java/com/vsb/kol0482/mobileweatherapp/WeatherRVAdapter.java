@@ -1,4 +1,4 @@
-package com.vsb.kru13.barcodetemplate;
+package com.vsb.kol0482.mobileweatherapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;

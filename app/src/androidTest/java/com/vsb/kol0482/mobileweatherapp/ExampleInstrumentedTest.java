@@ -1,4 +1,4 @@
-package com.vsb.kru13.barcodetemplate;
+package com.vsb.kol0482.mobileweatherapp;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.vsb.kru13.barcodetemplate", appContext.getPackageName());
+        assertEquals("com.vsb.kol0482.mobileweatherapp", appContext.getPackageName());
     }
 }
