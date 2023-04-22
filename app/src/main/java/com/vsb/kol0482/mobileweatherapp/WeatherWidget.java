@@ -9,14 +9,13 @@ import android.widget.RemoteViews;
 
 /**
  * Implementation of App Widget functionality.
- * App Widget Configuration implemented in {@link WeatherConfigureActivity WeatherConfigureActivity}
  */
-public class Weather extends AppWidgetProvider {
+public class WeatherWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
 
             // Set up the first tile
             Intent intent1 = new Intent(context, MainActivity.class);
@@ -48,13 +47,6 @@ public class Weather extends AppWidgetProvider {
         }
     }
 
-    @Override
-    public void onDeleted(Context context, int[] appWidgetIds) {
-        // When the user deletes the widget, delete the preference associated with it.
-        for (int appWidgetId : appWidgetIds) {
-            WeatherConfigureActivity.deleteTitlePref(context, appWidgetId);
-        }
-    }
 
     @Override
     public void onEnabled(Context context) {

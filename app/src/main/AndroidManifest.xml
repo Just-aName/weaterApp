@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <receiver
-            android:name=".Weather"
+            android:name=".WeatherWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -23,16 +23,8 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/weather_info" />
+                android:resource="@xml/weather_widget_info" />
         </receiver>
-
-        <activity
-            android:name=".WeatherConfigureActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".GraphActivity"
             android:exported="true" />
