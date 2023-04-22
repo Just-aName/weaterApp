@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_widget_background"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:alpha="0.5">
 
     <!-- Top Row -->
     <LinearLayout
@@ -28,6 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:text="Temperature: 22°C"/>
 
         </LinearLayout>
@@ -47,6 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:text="Humidity: 45%"/>
 
         </LinearLayout>
@@ -76,6 +81,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:text="Wind Speed: 12 km/h"/>
 
         </LinearLayout>
@@ -95,6 +102,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:textColor="#000000"
+                android:textStyle="bold"
                 android:text="Precipitation: 25%"/>
 
         </LinearLayout>
