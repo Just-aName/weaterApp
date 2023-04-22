@@ -154,6 +154,19 @@
             android:layout_marginBottom="241dp"
             android:text="Button" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="63dp"
+            android:layout_marginTop="379dp"
+            android:layout_marginEnd="260dp"
+            android:layout_marginBottom="586dp"
+            android:text="Button" />
+
 
     </RelativeLayout>
 </RelativeLayout>

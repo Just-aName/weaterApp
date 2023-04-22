@@ -14,6 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".MenuActivity"
+            android:exported="true" />
+
         <receiver
             android:name=".WeatherWidget"
             android:exported="true">
@@ -25,6 +29,7 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/weather_widget_info" />
         </receiver>
+
         <activity
             android:name=".GraphActivity"
             android:exported="true" />

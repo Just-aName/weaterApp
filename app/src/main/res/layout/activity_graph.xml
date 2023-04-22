@@ -1,54 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-
-<!-- Horní část aktivity s nadpisem a tlačítkem menu -->
-<RelativeLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <!-- Horní část aktivity s nadpisem a tlačítkem menu -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Weather Data Graph"
-        android:textSize="24sp"
-        android:textColor="@color/black"/>
+        android:padding="16dp"
+        android:background="@color/colorPrimary">
 
-    <ImageButton
-        android:id="@+id/menu_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_menu"/>
-</RelativeLayout>
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weather Data Graph"
+            android:textSize="24sp"
+            android:textColor="@color/black"/>
 
-<!-- Mezera nad datepickerem -->
-<View
-    android:layout_width="match_parent"
-    android:layout_height="16dp"/>
+        <ImageButton
+            android:id="@+id/menu_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_menu"/>
+    </RelativeLayout>
 
-<!-- DatePicker s aktuálním datem -->
+    <!-- Mezera nad datepickerem -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
+
+    <!-- DatePicker s aktuálním datem -->
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/rounded_rect">
-
-        <DatePicker
-            android:id="@+id/date_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="false"
-            android:visibility="gone"
-            android:minDate="0" />
-
         <!-- Textové pole s dnešním datem -->
-        <TextView
-            android:id="@+id/date_text"
+        <Button
+            android:id="@+id/date_picker_button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -60,10 +52,10 @@ android:layout_height="match_parent">
             android:padding="8dp"/>
     </RelativeLayout>
 
-<!-- Mezera nad textovými poli -->
-<View
-    android:layout_width="match_parent"
-    android:layout_height="16dp"/>
+    <!-- Mezera nad textovými poli -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
 
     <!-- Textová pole s mezerami -->
     <LinearLayout
@@ -102,7 +94,6 @@ android:layout_height="match_parent">
         <View
             android:layout_width="16dp"
             android:layout_height="match_parent"/>
-
         <TextView
             android:id="@+id/field3"
             android:layout_width="0dp"
@@ -116,16 +107,16 @@ android:layout_height="match_parent">
 
     </LinearLayout>
 
-<!-- Mezera nad grafem -->
-<View
-    android:layout_width="match_parent"
-    android:layout_height="16dp"/>
+    <!-- Mezera nad grafem -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
 
-<!-- Graf -->
-<com.github.mikephil.charting.charts.LineChart
-    android:id="@+id/line_chart"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="1" />
+    <!-- Graf -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
