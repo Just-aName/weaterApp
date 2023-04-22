@@ -1,28 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/configure_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <!-- Menu for Tile 1 -->
     <TextView
+        android:id="@+id/tile1_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:labelFor="@id/appwidget_text"
-        android:text="@string/configure" />
+        android:padding="16dp"
+        android:text="Tile 1 Menu"
+        android:clickable="true"
+        android:onClick="showTile1Menu"/>
 
-    <EditText
-        android:id="@+id/appwidget_text"
+    <!-- Menu for Tile 2 -->
+    <TextView
+        android:id="@+id/tile2_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text" />
+        android:padding="16dp"
+        android:text="Tile 2 Menu"
+        android:clickable="true"
+        android:onClick="showTile2Menu"/>
 
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
+    <!-- Menu for Tile 3 -->
+    <TextView
+        android:id="@+id/tile3_menu"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/add_widget" />
+        android:padding="16dp"
+        android:text="Tile 3 Menu"
+        android:clickable="true"
+        android:onClick="showTile3Menu"/>
+
+    <!-- Menu for Tile 4 -->
+    <TextView
+        android:id="@+id/tile4_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Tile 4 Menu"
+        android:clickable="true"
+        android:onClick="showTile4Menu"/>
 
 </LinearLayout>

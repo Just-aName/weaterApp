@@ -1,8 +1,10 @@
 package com.vsb.kol0482.mobileweatherapp;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 /**
@@ -11,23 +13,38 @@ import android.widget.RemoteViews;
  */
 public class Weather extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
-        CharSequence widgetText = WeatherConfigureActivity.loadTitlePref(context, appWidgetId);
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
-
-        // Instruct the widget manager to update the widget
-        appWidgetManager.updateAppWidget(appWidgetId, views);
-    }
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather);
+
+            // Set up the first tile
+            Intent intent1 = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent1 = PendingIntent.getActivity(context, 0, intent1, 0);
+            views.setOnClickPendingIntent(R.id.tile1, pendingIntent1);
+
+            // Set up the second tile
+            Intent intent2 = new Intent(context, GraphActivity.class);
+            PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intent2, 0);
+            views.setOnClickPendingIntent(R.id.tile2, pendingIntent2);
+
+            // Set up the third tile
+            Intent intent3 = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent3 = PendingIntent.getActivity(context, 0, intent3, 0);
+            views.setOnClickPendingIntent(R.id.tile3, pendingIntent3);
+
+            // Set up the fourth tile
+            Intent intent4 = new Intent(context, GraphActivity.class);
+            PendingIntent pendingIntent4 = PendingIntent.getActivity(context, 0, intent4, 0);
+            views.setOnClickPendingIntent(R.id.tile4, pendingIntent4);
+
+            // Update the text for each tile
+            views.setTextViewText(R.id.tile1_text, "Temperature: 22°C");
+            views.setTextViewText(R.id.tile2_text, "Humidity: 45%");
+            views.setTextViewText(R.id.tile3_text, "Wind Speed: 12 km/h");
+            views.setTextViewText(R.id.tile4_text, "Precipitation: 25%");
+
+            appWidgetManager.updateAppWidget(appWidgetId, views);
         }
     }
 

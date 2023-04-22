@@ -1,19 +1,99 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Widget.mobileweatherapp.AppWidget.Container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme.AppWidgetContainer">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/appwidget_text"
-        style="@style/Widget.mobileweatherapp.AppWidget.InnerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_margin="8dp"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
-</RelativeLayout>
+    <!-- Top Row -->
+    <LinearLayout
+        android:id="@+id/top_row"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- First tile -->
+        <LinearLayout
+            android:id="@+id/tile1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="openMainActivity">
+
+            <TextView
+                android:id="@+id/tile1_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Temperature: 22°C"/>
+
+        </LinearLayout>
+
+        <!-- Second tile -->
+        <LinearLayout
+            android:id="@+id/tile2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="openGraphActivity">
+
+            <TextView
+                android:id="@+id/tile2_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Humidity: 45%"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Bottom Row -->
+    <LinearLayout
+        android:id="@+id/bottom_row"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- Third tile -->
+        <LinearLayout
+            android:id="@+id/tile3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="openMainActivity">
+
+            <TextView
+                android:id="@+id/tile3_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Wind Speed: 12 km/h"/>
+
+        </LinearLayout>
+
+        <!-- Fourth tile -->
+        <LinearLayout
+            android:id="@+id/tile4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:onClick="openGraphActivity">
+
+            <TextView
+                android:id="@+id/tile4_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Precipitation: 25%"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
