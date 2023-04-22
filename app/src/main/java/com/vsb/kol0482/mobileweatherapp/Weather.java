@@ -39,10 +39,10 @@ public class Weather extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.tile4, pendingIntent4);
 
             // Update the text for each tile
-            views.setTextViewText(R.id.tile1_text, "Temperature: 22°C");
-            views.setTextViewText(R.id.tile2_text, "Humidity: 45%");
-            views.setTextViewText(R.id.tile3_text, "Wind Speed: 12 km/h");
-            views.setTextViewText(R.id.tile4_text, "Precipitation: 25%");
+            views.setTextViewText(R.id.tile1_text, WidgetSettings.value0.getValue());
+            views.setTextViewText(R.id.tile2_text, WidgetSettings.value1.getValue());
+            views.setTextViewText(R.id.tile3_text, WidgetSettings.value2.getValue());
+            views.setTextViewText(R.id.tile4_text, WidgetSettings.value3.getValue());
 
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
