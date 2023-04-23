@@ -1,11 +1,17 @@
 package com.vsb.kol0482.mobileweatherapp;
 
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
+import android.util.Log;
+import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 /**
  * Implementation of App Widget functionality.
@@ -43,18 +49,34 @@ public class WeatherWidget extends AppWidgetProvider {
             views.setTextViewText(R.id.tile3_text, WidgetSettings.value2.getValue());
             views.setTextViewText(R.id.tile4_text, WidgetSettings.value3.getValue());
 
+            if(WidgetSettings.value1.getValue() == WidgetOptions.NONE.getValue()) {
+                views.setViewVisibility(R.id.tile2, View.GONE);
+            }
+            else{
+                views.setViewVisibility(R.id.tile2, View.VISIBLE);
+            }
             appWidgetManager.updateAppWidget(appWidgetId, views);
+
+            AlarmHandler alarmHandler = new AlarmHandler(context);
+            alarmHandler.cancelAlarmManager();
+            alarmHandler.setAlarmManager();
+
+            Log.d("WIDGET", "Widget updated!");
         }
     }
 
-
     @Override
     public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
+        super.onEnabled(context);
     }
 
     @Override
     public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
+        //stop updating the widget
+        AlarmHandler alarmHandler = new AlarmHandler(context);
+        alarmHandler.cancelAlarmManager();
+
+        Log.d("WIDGET", "Widget removed!");
     }
+
 }

@@ -44,13 +44,13 @@
             android:id="@+id/date_picker_button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="DATUM"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:layout_gravity="center_horizontal"
-            android:text="DATUM"
-            android:visibility="visible"
-            android:gravity="center"
-            android:padding="8dp"/>
+            android:visibility="visible" />
     </RelativeLayout>
 
     <!-- Mezera nad textovými poli -->

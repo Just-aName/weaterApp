@@ -62,7 +62,9 @@ public class GraphActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                // zpracování vybraného data
+                String selectedDate = dayOfMonth + "." + (monthOfYear+1) + "." + year;
+                Button datePickerButton = findViewById(R.id.date_picker_button2);
+                datePickerButton.setText(selectedDate);
             }
         }, year, month, day);
         datePickerDialog.show();

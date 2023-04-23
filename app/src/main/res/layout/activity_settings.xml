@@ -40,6 +40,7 @@
             android:background="@drawable/btn_background"
             android:elevation="4dp"
             android:text="Uložit"
+            android:onClick="save"
             android:textColor="@android:color/white" />
 
     </androidx.appcompat.widget.Toolbar>
