@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:alpha="0.5">
 
+
+
     <!-- Top Row -->
     <LinearLayout
         android:id="@+id/top_row"
@@ -23,7 +25,17 @@
             android:layout_weight="1"
             android:clickable="true"
             android:background="@drawable/app_widget_inner_view_background"
-            android:onClick="openMainActivity">
+            android:onClick="openMainActivity"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tile1_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Temperature"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tile1_text"
@@ -32,7 +44,7 @@
                 android:gravity="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="Temperature: 22°C"/>
+                android:text="22°C"/>
 
         </LinearLayout>
 
@@ -44,7 +56,17 @@
             android:layout_weight="1"
             android:clickable="true"
             android:background="@drawable/app_widget_inner_view_background"
-            android:onClick="openGraphActivity">
+            android:onClick="openGraphActivity"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tile2_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Humidity"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tile2_text"
@@ -53,7 +75,7 @@
                 android:gravity="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="Humidity: 45%"/>
+                android:text="45%"/>
 
         </LinearLayout>
 
@@ -75,7 +97,17 @@
             android:layout_weight="1"
             android:clickable="true"
             android:background="@drawable/app_widget_inner_view_background"
-            android:onClick="openMainActivity">
+            android:onClick="openGraphActivity"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tile3_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wind Speed"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tile3_text"
@@ -84,7 +116,7 @@
                 android:gravity="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="Wind Speed: 12 km/h"/>
+                android:text="12 km/h"/>
 
         </LinearLayout>
 
@@ -96,7 +128,17 @@
             android:layout_weight="1"
             android:clickable="true"
             android:background="@drawable/app_widget_inner_view_background"
-            android:onClick="openGraphActivity">
+            android:onClick="openGraphActivity"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tile4_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Precipitation"
+                android:textColor="#000000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tile4_text"
@@ -105,9 +147,32 @@
                 android:gravity="center"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:text="Precipitation: 25%"/>
+                android:text="25%%"/>
 
         </LinearLayout>
+
+    </LinearLayout>
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/header_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Last update:" />
+
+        <TextView
+            android:id="@+id/header_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="23.04.2023 22:00" />
 
     </LinearLayout>
 

@@ -44,17 +44,11 @@ public class WeatherWidget extends AppWidgetProvider {
             views.setOnClickPendingIntent(R.id.tile4, pendingIntent4);
 
             // Update the text for each tile
-            views.setTextViewText(R.id.tile1_text, WidgetSettings.value0.getValue());
-            views.setTextViewText(R.id.tile2_text, WidgetSettings.value1.getValue());
-            views.setTextViewText(R.id.tile3_text, WidgetSettings.value2.getValue());
-            views.setTextViewText(R.id.tile4_text, WidgetSettings.value3.getValue());
+            views.setTextViewText(R.id.tile1_text, "a");
+            views.setTextViewText(R.id.tile2_text, "b");
+            views.setTextViewText(R.id.tile3_text, "c");
+            views.setTextViewText(R.id.tile4_text, "d");
 
-            if(WidgetSettings.value1.getValue() == WidgetOptions.NONE.getValue()) {
-                views.setViewVisibility(R.id.tile2, View.GONE);
-            }
-            else{
-                views.setViewVisibility(R.id.tile2, View.VISIBLE);
-            }
             appWidgetManager.updateAppWidget(appWidgetId, views);
 
             AlarmHandler alarmHandler = new AlarmHandler(context);
@@ -68,6 +62,7 @@ public class WeatherWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
+        WidgetSettings.initWidgetSettings(context);
     }
 
     @Override
