@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,17 +27,12 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // naplnění listu položkami menu
-        menuItems.add("Položka 1");
-        menuItems.add("Položka 2");
-        menuItems.add("Položka 3");
-        menuItems.add("Položka 4");
-        menuItems.add("Položka 5");
-        menuItems.add("Položka 6");
-        menuItems.add("Položka 7");
-        menuItems.add("Položka 8");
-        menuItems.add("Položka 9");
-        menuItems.add("Položka 10");
+        //naplní menu dlaždicemi
+        WidgetOptions[] options = WidgetOptions.values();
+        for (int i = 0; i < options.length; i++) {
+            if(options[i].getValue() != WidgetOptions.NONE.getValue())
+                menuItems.add(options[i].getValue());
+        }
 
         // nalezení GridLayoutu v layoutu
         gridLayout = findViewById(R.id.grid_layout);
@@ -69,8 +65,10 @@ public class MenuActivity extends AppCompatActivity {
             cardView.setContentPadding(16, 16, 16, 16);
 
             // vytvoření TextView pro text v dlaždici
+            String menuText = menuItems.get(i);
             TextView textView = new TextView(this);
-            textView.setText(menuItems.get(i));
+            textView.setGravity(Gravity.CENTER);
+            textView.setText(menuText);
             textView.setTextSize(18);
             textView.setTextColor(Color.BLACK);
 
@@ -82,6 +80,7 @@ public class MenuActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(MenuActivity.this, GraphActivity.class);
+                    intent.putExtra("SelectedUnit", menuText);
                     startActivity(intent);
                 }
             });

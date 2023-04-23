@@ -30,6 +30,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
             // Set up the second tile
             Intent intent2 = new Intent(context, GraphActivity.class);
+            intent2.putExtra("SelectedUnit", WidgetSettings.GetRightUp());
             PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intent2, 0);
             views.setOnClickPendingIntent(R.id.tile2, pendingIntent2);
 
@@ -40,6 +41,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
             // Set up the fourth tile
             Intent intent4 = new Intent(context, GraphActivity.class);
+            intent2.putExtra("SelectedUnit", WidgetSettings.GetRightDown());
             PendingIntent pendingIntent4 = PendingIntent.getActivity(context, 0, intent4, 0);
             views.setOnClickPendingIntent(R.id.tile4, pendingIntent4);
 

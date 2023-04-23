@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,10 @@ public class GraphActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
+
+        String selectedUnit = getIntent().getStringExtra("SelectedUnit");
+        TextView headerText = findViewById(R.id.title);
+        headerText.setText(selectedUnit);
 
         Button datePickerButton = findViewById(R.id.date_picker_button2);
         datePickerButton.setOnClickListener(new View.OnClickListener() {
