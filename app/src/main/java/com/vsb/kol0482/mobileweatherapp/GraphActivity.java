@@ -67,4 +67,8 @@ public class GraphActivity extends AppCompatActivity {
         }, year, month, day);
         datePickerDialog.show();
     }
+
+    public void exit(View v){
+        finish();
+    }
 }

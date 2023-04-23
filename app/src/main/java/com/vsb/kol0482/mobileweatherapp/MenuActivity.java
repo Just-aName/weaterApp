@@ -113,4 +113,8 @@ public class MenuActivity extends AppCompatActivity {
         }, year, month, day);
         datePickerDialog.show();
     }
+
+    public void exit(View v){
+        finish();
+    }
 }
