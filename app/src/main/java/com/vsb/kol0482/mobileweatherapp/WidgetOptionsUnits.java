@@ -6,7 +6,6 @@ public enum WidgetOptionsUnits {
     OUTHUMIDITY("%"),
     PRESURE("mbar"),
     BAROMETER("mbar"),
-    RAINPEROUR("mm/h"),
     DEWPOINT("°C"),
     RAINTOTAL("mm"),
     HEATINDEX("°C"),

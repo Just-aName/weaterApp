@@ -6,7 +6,6 @@ public enum WidgetOptions {
     OUTHUMIDITY("Venkovní vlhkost"),
     PRESURE("Armosférický tlak abs."),
     BAROMETER("Armosféruický tlak p.n.h.m."),
-    RAINPEROUR("Srážky za hodinu"),
     DEWPOINT("Rosný bod"),
     RAINTOTAL("Celkové srážky"),
     HEATINDEX("Teplotní index"),
