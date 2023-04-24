@@ -42,10 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
     private RelativeLayout homeRL;
     private ProgressBar loadingPB;
-    private TextView cityNameTV, temperatureTV, conditionTV;
+    private TextView temperatureTV;
     private RecyclerView weatherRV;
-    private TextInputEditText cityEdt;
-    private ImageView backIV, iconIV, searchIV;
+    private ImageView backIV;
     private ArrayList<WeatherRVModal> weatherRVModalArrayList;
     private WeatherRVAdapter weatherRVAdapter;
 
@@ -62,10 +61,8 @@ public class MainActivity extends AppCompatActivity {
         homeRL = findViewById(R.id.idRLHome);
         loadingPB = findViewById(R.id.idPBLoading);
         temperatureTV = findViewById(R.id.idTVTemperature);
-        conditionTV = findViewById(R.id.idTVCondition);
         weatherRV = findViewById(R.id.idRVWeather);
         backIV = findViewById(R.id.idIVBack);
-        iconIV = findViewById(R.id.idVIcon);
         weatherRVModalArrayList = new ArrayList<>();
         weatherRVAdapter = new WeatherRVAdapter(this, weatherRVModalArrayList);
         weatherRV.setAdapter(weatherRVAdapter);
@@ -90,21 +87,29 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject data = response.getJSONObject(0);
                     String temperature = data.getString("outTemp_C");
                     temperatureTV.setText(temperature + "°C");
-                    String condition = "Zataženo";
-                    String conditionIcon = "cdn.weatherapi.com/weather/64x64/night/176.png";
-                    Picasso.get().load("http:".concat(conditionIcon)).into(iconIV);
-                    conditionTV.setText(condition);
                     Picasso.get().load("https://images.unsplash.com/photo-1605776502818-8d2103f63a25?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=683&q=80").into(backIV);
+                    WidgetOptions[] options = WidgetOptions.values();
+                    for (int j = 0; j < options.length; j++) {
+                        String apiDataName = ApiDataBinder.GetApiVersionFromEnum(options[j]);
+                        if(apiDataName.equals(""))
+                            continue;
+                        String number = data.getString(apiDataName);
+                        String unit = ApiDataBinder.GetUnitBaseOnEnum(options[j]);
+                        String name = options[j].getValue();
+                        weatherRVModalArrayList.add(new WeatherRVModal(number, name, unit));
+                    }
 
+                    /*
                     for(int i=1;i<response.length();i++){
-                        // Get current json object
                         JSONObject jData = response.getJSONObject(i);
+                        // Get current json object
                         String time = jData.getString("time");
                         String temper = jData.getString("outTemp_C");
-                        String img = "cdn.weatherapi.com/weather/64x64/night/176.png";
                         String wind = jData.getString("windSpeed_mps");
-                        weatherRVModalArrayList.add(new WeatherRVModal(time, temperature, img, wind));
+
+
                     }
+  */
                     weatherRVAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();

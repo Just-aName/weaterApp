@@ -39,17 +39,9 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         WeatherRVModal modal = weatherRVModalArrayList.get(position);
-        holder.temperatureTV.setText(modal.getTemperature() + "°C");
-        Picasso.get().load("http:".concat(modal.getIcon())).into(holder.conditionIV);
-        holder.windTV.setText(modal.getWindSpeed() + "Km/h");
-        SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
-        try {
-            Date t = input.parse(modal.getTime());
-            holder.timeTV.setText(output.format(t));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        holder.number.setText(modal.getValueNumber());
+        holder.name.setText(modal.getvalueName());
+        holder.unit.setText(modal.getUnit());
     }
 
     @Override
@@ -59,16 +51,13 @@ public class WeatherRVAdapter extends RecyclerView.Adapter<WeatherRVAdapter.View
 
     public class ViewHolder  extends  RecyclerView.ViewHolder{
 
-        private TextView windTV, temperatureTV, timeTV;
-        private ImageView conditionIV;
+        private TextView name, number, unit;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            windTV = itemView.findViewById(R.id.idTVWindSpeed);
-            temperatureTV = itemView.findViewById(R.id.idTVTemperature);
-            timeTV = itemView.findViewById(R.id.idTVTime);
-            conditionIV = itemView.findViewById(R.id.idIVCondition);
-
+            name = itemView.findViewById(R.id.idTVName);
+            number = itemView.findViewById(R.id.idTVValue);
+            unit = itemView.findViewById(R.id.idTVUnit);
         }
     }
 }

@@ -52,11 +52,6 @@ public class WeatherWidget extends AppWidgetProvider {
             PendingIntent pendingIntent4 = PendingIntent.getActivity(context, 4, intent4, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.tile4, pendingIntent4);
 
-            String a = WidgetSettings.GetLeftUp();
-            String b = WidgetSettings.GetRightUp();
-            String c = WidgetSettings.GetLeftDown();
-            String d = WidgetSettings.GetRightDown();
-
             // Update the text for each tile
             if(WidgetSettings.GetLeftUp().equals(WidgetOptions.NONE.getValue()))
             {

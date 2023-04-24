@@ -40,41 +40,43 @@
             app:title="WeatherApp" />
 
 
-
-        <TextView
-            android:id="@+id/idTVTemperature"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="488dp"
             android:layout_below="@id/main_activity_toolbar"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="23"
-            android:textColor="@color/white"
-            android:textSize="70dp" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/idVIcon"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/idTVTemperature"
-            android:layout_margin="10dp"
-            android:src="@mipmap/ic_launcher"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/idTVCondition"
-            android:layout_margin="10dp"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:text="Condition"
-            android:textColor="@color/white"
-            android:layout_below="@id/idVIcon"
-            />
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:layout_width="293dp"
+                android:layout_height="249dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/white_circle">
+
+                <TextView
+                    android:id="@+id/idTVTemperatureHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="44dp"
+                    android:text="Aktuální teplota"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/idTVTemperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/idTVTemperatureHeading"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="23"
+                    android:textColor="@color/white"
+                    android:textSize="70dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -84,7 +86,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Dříve naměřené hodnoty"
+            android:text="Další naměřené hodnoty"
             android:textColor="@color/white"
             android:textStyle="bold" />
 

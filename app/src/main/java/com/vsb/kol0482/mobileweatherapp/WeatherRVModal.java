@@ -1,49 +1,43 @@
 package com.vsb.kol0482.mobileweatherapp;
 
+import org.json.JSONObject;
+
 public class WeatherRVModal {
 
-    private String time;
-    private String temperature;
-    private String icon;
-    private String windSpeed;
+    private String valueName;
+    private String valueNumber;
+    private String unit;
 
 
-    public WeatherRVModal(String time, String temperature, String icon, String windSpeed) {
-        this.time = time;
-        this.temperature = temperature;
-        this.icon = icon;
-        this.windSpeed = windSpeed;
+    public WeatherRVModal(String valueNumber, String valueName, String unit) {
+        this.valueName = valueName;
+        this.valueNumber = valueNumber;
+        this.unit = unit;
     }
 
-    public String getTime() {
-        return time;
+    public String getvalueName() {
+        return valueName;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setValueName(String value) {
+        this.valueName = value;
     }
 
-    public String getTemperature() {
-        return temperature;
+    public String getValueNumber() {
+        return valueNumber;
     }
 
-    public void setTemperature(String temperature) {
-        this.temperature = temperature;
+    public void setValueNumber(String value) {
+        this.valueNumber = value;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setUnit(String value) {
+        this.unit = value;
     }
 
-    public String getWindSpeed() {
-        return windSpeed;
-    }
 
-    public void setWindSpeed(String windSpeed) {
-        this.windSpeed = windSpeed;
-    }
 }

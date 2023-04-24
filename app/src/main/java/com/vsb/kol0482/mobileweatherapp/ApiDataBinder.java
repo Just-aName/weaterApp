@@ -157,4 +157,106 @@ public class ApiDataBinder {
                 return WidgetOptions.NONE;
         }
     }
+
+    public static String GetApiVersionFromEnum(WidgetOptions variable) {
+        switch (variable) {
+            case CLOUDBASE:
+                return "cloudbase_meter";
+            case OUTHUMIDITY:
+                return "outHumidity";
+            case PRESURE:
+                return "pressure_mbar";
+            case BAROMETER:
+                return "barometer_mbar";
+            case DEWPOINT:
+                return "dewpoint_C";
+            case RAINTOTAL:
+                return "rainTotal";
+            case HEATINDEX:
+                return "heatindex_C";
+            case INDEWPOINT:
+                return "inDewpoint_C";
+            case DAYRAIN:
+                return "dayRain_mm";
+            case ALTIMETER:
+                return "altimeter_mbar";
+            case WINDCHILL:
+                return "windchill_C";
+            case APPTEMP:
+                return "appTemp_C";
+            case OUTTEMP:
+                return "outTemp_C";
+            case MAXSOLARRAD:
+                return "maxSolarRad_Wpm2";
+            case HUMIDITYINDEX:
+                return "humidex_C";
+            case HOURRAIN:
+                return "hourRain_mm";
+            case WINDGUST:
+                return "windGust_mps";
+            case INTEMP:
+                return "inTemp_C";
+            case RAIN24:
+                return "rain24_mm";
+            case WINDDIRECTION:
+                return "windDir";
+            case WINDSPEED:
+                return "windSpeed_mps";
+            case INHUMIDITY:
+                return "inHumidity";
+            default:
+                return "";
+        }
+    }
+
+    public static String GetUnitBaseOnEnum(WidgetOptions variable) {
+        switch (variable) {
+            case CLOUDBASE:
+                return "m";
+            case OUTHUMIDITY:
+                return "%";
+            case PRESURE:
+                return "mbar";
+            case BAROMETER:
+                return "mbar";
+            case DEWPOINT:
+                return "°C";
+            case RAINTOTAL:
+                return "mm";
+            case HEATINDEX:
+                return "°C";
+            case INDEWPOINT:
+                return "°C";
+            case DAYRAIN:
+                return "mm";
+            case ALTIMETER:
+                return "mbar";
+            case WINDCHILL:
+                return "°C";
+            case APPTEMP:
+                return "°C";
+            case OUTTEMP:
+                return "°C";
+            case MAXSOLARRAD:
+                return "W/m^2";
+            case HUMIDITYINDEX:
+                return "°C";
+            case HOURRAIN:
+                return "mm";
+            case WINDGUST:
+                return "mps";
+            case INTEMP:
+                return "°C";
+            case RAIN24:
+                return "mm";
+            case WINDDIRECTION:
+                return "windDir";
+            case WINDSPEED:
+                return "mps";
+            case INHUMIDITY:
+                return "%";
+            default:
+                return "";
+        }
+    }
 }
