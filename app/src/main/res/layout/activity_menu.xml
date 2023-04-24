@@ -7,32 +7,76 @@
     android:layout_height="match_parent"
     tools:context=".MenuActivity">
 
-    <!-- Ohraničená hlavička -->
-    <View
-        android:id="@+id/header_view"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
+    <!-- Hlavička -->
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="Přehled dnešních hodnot"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:gravity="center"
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tlačítko pro výběr data pomocí datepickeru -->
-    <Button
-        android:id="@+id/date_picker_button"
+    <!-- Menu v pravém horním rohu -->
+    <ImageButton
+        android:id="@+id/menu_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vybrat datum"
-        app:layout_constraintTop_toTopOf="@id/header_view"
-        app:layout_constraintBottom_toBottomOf="@id/header_view"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:elevation="4dp"
+        android:src="@drawable/ic_back"
+        android:onClick="exit"
+        app:layout_constraintTop_toTopOf="@id/title_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/title_text_view" />
+
+    <!-- Nadpis a datepicker -->
+    <LinearLayout
+        android:id="@+id/date_picker_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_rect"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/title_text_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:padding="16dp">
+
+        <!-- Nadpis pro datepicker -->
+        <TextView
+            android:id="@+id/date_picker_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vybrat datum:"
+            android:textColor="#000"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Tlačítko pro výběr data pomocí datepickeru -->
+        <Button
+            android:id="@+id/date_picker_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Vybrat datum dnes" />
+
+    </LinearLayout>
 
     <!-- GridLayout pro dlaždice -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/header_view"
+        app:layout_constraintTop_toBottomOf="@id/date_picker_container"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -48,19 +92,5 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.core.widget.NestedScrollView>
-
-    <!-- Menu v pravém horním rohu -->
-    <ImageButton
-        android:id="@+id/menu_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:elevation="4dp"
-        android:src="@drawable/ic_back"
-        android:onClick="exit"
-        app:layout_constraintTop_toTopOf="@id/header_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/header_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

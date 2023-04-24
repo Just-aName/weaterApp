@@ -1,5 +1,7 @@
 package com.vsb.kol0482.mobileweatherapp;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -27,25 +27,33 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class GraphActivity extends AppCompatActivity {
+public class MultipleDays extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_graph);
-
+        setContentView(R.layout.activity_multiple_days);
         String selectedUnit = getIntent().getStringExtra("SelectedUnit");
-        TextView headerText = findViewById(R.id.title);
+        TextView headerText = findViewById(R.id.title_multiple);
         headerText.setText(selectedUnit);
 
-        Button datePickerButton = findViewById(R.id.date_picker_button2);
-        datePickerButton.setOnClickListener(new View.OnClickListener() {
+        Button datePickerButton1 = findViewById(R.id.date_picker_button_multiple3);
+        datePickerButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog();
+                showDatePickerDialog(datePickerButton1);
             }
         });
 
-        LineChart lineChart = findViewById(R.id.line_chart);
+        Button datePickerButton2 = findViewById(R.id.date_picker_button_multiple4);
+        datePickerButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog(datePickerButton2);
+            }
+        });
+
+        LineChart lineChart = findViewById(R.id.line_chart_multiple);
 
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Entry(getXValue("2023-04-20 02:11"), 4));
@@ -74,12 +82,12 @@ public class GraphActivity extends AppCompatActivity {
         };
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new MyXAxisValueFormatter(xAxisFormatter));
+        xAxis.setValueFormatter(new MultipleDays.MyXAxisValueFormatter(xAxisFormatter));
 
         lineChart.invalidate(); // refresh
     }
 
-    private void showDatePickerDialog() {
+    private void showDatePickerDialog(Button datePickerButton) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -89,7 +97,6 @@ public class GraphActivity extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String selectedDate = dayOfMonth + "." + (monthOfYear+1) + "." + year;
-                Button datePickerButton = findViewById(R.id.date_picker_button2);
                 datePickerButton.setText(selectedDate);
             }
         }, year, month, day);

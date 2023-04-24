@@ -9,25 +9,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
+        android:gravity="center"
         android:background="@color/colorPrimary">
 
-        <TextView
-            android:id="@+id/title"
+        <Button
+            android:id="@+id/refresh_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:text="Načíst" />
+
+        <TextView
+            android:id="@+id/title_multiple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/menu_button_multiple"
             android:gravity="center"
             android:text="Název hodnoty"
+            android:layout_toEndOf="@id/refresh_button"
             android:textColor="@color/white"
-            android:layout_centerInParent="true"
             android:textSize="24sp" />
 
         <ImageButton
-            android:id="@+id/menu_button"
+            android:id="@+id/menu_button_multiple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_back"
-            android:onClick="exit"/>
+            android:layout_centerVertical="true"
+            android:onClick="exit"
+            android:src="@drawable/ic_back" />
     </RelativeLayout>
 
     <!-- Mezera nad datepickerem -->
@@ -36,24 +48,60 @@
         android:layout_height="16dp"/>
 
     <!-- DatePicker s aktuálním datem -->
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/rounded_rect">
-        <!-- Textové pole s dnešním datem -->
-        <Button
-            android:id="@+id/date_picker_button2"
-            android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <!-- První sloupec -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
-            android:padding="8dp"
-            android:text="DATUM"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:visibility="visible" />
-    </RelativeLayout>
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:background="@drawable/rounded_rect"
+            android:orientation="vertical">
+
+            <!-- Nadpis prvního tlačítka -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="První datum" />
+
+            <!-- První tlačítko s aktuálním datem -->
+            <Button
+                android:id="@+id/date_picker_button_multiple3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vyberte datum" />
+
+        </LinearLayout>
+
+        <!-- Druhý sloupec -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_rect"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Nadpis druhého tlačítka -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Druhé datum" />
+
+            <!-- Druhé tlačítko s aktuálním datem -->
+            <Button
+                android:id="@+id/date_picker_button_multiple4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vyberte datum" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <!-- Mezera nad textovými poli -->
     <View
@@ -76,7 +124,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/field1_label"
+                android:id="@+id/field1_label_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Minimum"
@@ -110,7 +158,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/field2_label"
+                android:id="@+id/field2_label_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Průměr"
@@ -142,7 +190,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/field3_label"
+                android:id="@+id/field3_label_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maximum"
@@ -172,7 +220,7 @@
 
     <!-- Graf -->
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart"
+        android:id="@+id/line_chart_multiple"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

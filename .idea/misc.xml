@@ -13,12 +13,15 @@
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/card_back.xml" value="0.22135416666666666" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/ic_menu.xml" value="0.17962962962962964" />
+        <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/ic_save.xml" value="0.221875" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/ic_search.xml" value="0.17962962962962964" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/rounded_rect.xml" value="0.22135416666666666" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/drawable/widget_provider_info.xml" value="0.3828125" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_graph.xml" value="0.2015625" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_menu.xml" value="0.19114583333333332" />
+        <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_multiple_days.xml" value="0.3242753623188406" />
+        <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_multiple_menu.xml" value="0.20572916666666666" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_settings.xml" value="0.20520833333333333" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/activity_tile.xml" value="0.20520833333333333" />
         <entry key="..\:/bc/MobileApp/app/src/main/res/layout/content_navigation_menu.xml" value="0.20520833333333333" />
