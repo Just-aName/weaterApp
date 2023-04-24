@@ -16,14 +16,6 @@ public class MyWidgetService extends BroadcastReceiver {
         //wake the device
         WakeLocker.acquire(context);
 
-        //increase the number in the widget
-        SharedPreferences preferences = context.getSharedPreferences("PREFS", 0);
-        int value = preferences.getInt("value", 1);
-        value++;
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("value", value);
-        editor.apply();
-
         //force widget update
         Intent widgetIntent = new Intent(context, WeatherWidget.class);
         widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);

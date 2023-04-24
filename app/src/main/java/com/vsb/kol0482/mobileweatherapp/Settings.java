@@ -2,6 +2,10 @@ package com.vsb.kol0482.mobileweatherapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.PopupMenu;
+import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -98,7 +103,18 @@ public class Settings extends AppCompatActivity {
         WidgetSettings.SetLeftDown(leftDown);
         WidgetSettings.SetRightDown(rightDown);
 
+        updateWidgets(this);
+
         finish();
         Toast.makeText(this, "Aktivita byla ukončena.", Toast.LENGTH_SHORT).show(); // vypsání Toast hlášky
+    }
+
+    public static void updateWidgets(Context context) {
+        //force widget update
+        Intent widgetIntent = new Intent(context, WeatherWidget.class);
+        widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, WeatherWidget.class));
+        widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+        context.sendBroadcast(widgetIntent);
     }
 }

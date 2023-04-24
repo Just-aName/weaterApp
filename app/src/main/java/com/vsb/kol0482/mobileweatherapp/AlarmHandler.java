@@ -28,7 +28,7 @@ public class AlarmHandler {
 
         //get current time and add 10 seconds
         Calendar c = Calendar.getInstance();
-        long l = c.getTimeInMillis() + 10000;
+        long l = c.getTimeInMillis() + 1000000000;
 
         //set the alarm for 10 seconds in the future
         if (am != null) {
