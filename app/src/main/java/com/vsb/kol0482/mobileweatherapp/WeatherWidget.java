@@ -12,18 +12,21 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
  * Implementation of App Widget functionality.
  */
 public class WeatherWidget extends AppWidgetProvider {
-
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.weather_widget);
 
+            Intent settingIntent = new Intent(context, Settings.class);
+            PendingIntent pendingIntent5 = PendingIntent.getActivity(context, 5, settingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.header_layout, pendingIntent5);
 
             // Set up the first tile
             Intent intent1 = new Intent(context, GraphActivity.class);
