@@ -13,14 +13,19 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity {
     private List<String> menuItems = new ArrayList<>(); // list pro položky menu
     private GridLayout gridLayout; // GridLayout pro dlaždice
+    private String selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,7 @@ public class MenuActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(MenuActivity.this, GraphActivity.class);
                     intent.putExtra("SelectedUnit", menuText);
+                    intent.putExtra("SelectedDate", selectedDate);
                     startActivity(intent);
                 }
             });
@@ -93,12 +99,15 @@ public class MenuActivity extends AppCompatActivity {
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog();
+                showDatePickerDialog(datePickerButton);
             }
         });
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        selectedDate = sdf.format(new Date());
+        datePickerButton.setText(selectedDate);
     }
 
-    private void showDatePickerDialog() {
+    private void showDatePickerDialog(Button datePickerButton) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -107,7 +116,8 @@ public class MenuActivity extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                // zpracování vybraného data
+                selectedDate = dayOfMonth + "." + (monthOfYear+1) + "." + year;
+                datePickerButton.setText(selectedDate);
             }
         }, year, month, day);
         datePickerDialog.show();

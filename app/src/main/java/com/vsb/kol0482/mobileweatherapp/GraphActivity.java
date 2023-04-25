@@ -45,6 +45,13 @@ public class GraphActivity extends AppCompatActivity {
             }
         });
 
+        String selectedDate = getIntent().getStringExtra("SelectedDate");
+        if(selectedDate == null || selectedDate.isEmpty()) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            selectedDate = sdf.format(new Date());
+        }
+        datePickerButton.setText(selectedDate);
+
         LineChart lineChart = findViewById(R.id.line_chart);
 
         ArrayList<Entry> entries = new ArrayList<>();

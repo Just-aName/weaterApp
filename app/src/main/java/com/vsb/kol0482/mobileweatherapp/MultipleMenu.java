@@ -7,20 +7,35 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class MultipleMenu extends AppCompatActivity {
     private List<String> menuItems = new ArrayList<>(); // list pro položky menu
     private GridLayout gridLayout; // GridLayout pro dlaždice
+    private String selectedDateFrom;
+    private String selectedDateTo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +94,44 @@ public class MultipleMenu extends AppCompatActivity {
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if(selectedDateFrom == null || selectedDateFrom.isEmpty() || selectedDateTo == null || selectedDateTo.isEmpty()) {
+                        Toast.makeText(MultipleMenu.this, "Nastavte časové období", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    long diffInDays = 0;
+                    // vytvoření formatteru pro data ve formátu "dd.MM.yyyy"
+                    SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+                    // ošetření výjimky ParseException
+                    try {
+                        // převod řetězců na Date instance pomocí formatteru
+                        Date date1 = format.parse(selectedDateFrom);
+                        Date date2 = format.parse(selectedDateTo);
+
+                        long diffInMilliseconds = Math.abs(date2.getTime() - date1.getTime());
+                        //Rozdíl mezi daty
+                        diffInDays = TimeUnit.DAYS.convert(diffInMilliseconds, TimeUnit.MILLISECONDS);
+
+                        // porovnání dvou Date instancí pomocí metody compareTo()
+                        int compareResult = date1.compareTo(date2);
+                        if (compareResult > 0) {
+                            //Data jsou různá a data v selectedDateFrom jsou větší než v selectedDateTo
+                            Toast.makeText(MultipleMenu.this, "Datum 'od' nemůže být větší než datum 'do'.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+
+                    } catch (ParseException e) {
+                        // zachycení výjimky a vypsání chybové zprávy
+                        e.printStackTrace();
+                        Log.d("DATE","Chyba při parsování data.");
+                    }
+
+
                     Intent intent = new Intent(MultipleMenu.this, MultipleDays.class);
                     intent.putExtra("SelectedUnit", menuText);
+                    intent.putExtra("SelectedDateFrom", selectedDateFrom);
+                    intent.putExtra("SelectedDateTo", selectedDateTo);
+                    intent.putExtra("DaysBetween", diffInDays);
                     startActivity(intent);
                 }
             });
@@ -93,7 +144,7 @@ public class MultipleMenu extends AppCompatActivity {
         datePickerButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(datePickerButton1);
+                showDatePickerDialog(datePickerButton1, true);
             }
         });
 
@@ -101,12 +152,12 @@ public class MultipleMenu extends AppCompatActivity {
         datePickerButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog(datePickerButton2);
+                showDatePickerDialog(datePickerButton2, false);
             }
         });
     }
 
-    private void showDatePickerDialog(Button datePickerButton) {
+    private void showDatePickerDialog(Button datePickerButton, Boolean from) {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -115,8 +166,14 @@ public class MultipleMenu extends AppCompatActivity {
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                String selectedDate = dayOfMonth + "." + (monthOfYear+1) + "." + year;
-                datePickerButton.setText(selectedDate);
+                if(from) {
+                    selectedDateFrom = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    datePickerButton.setText(selectedDateFrom);
+                }
+                else{
+                    selectedDateTo = dayOfMonth + "." + (monthOfYear + 1) + "." + year;
+                    datePickerButton.setText(selectedDateTo);
+                }
             }
         }, year, month, day);
         datePickerDialog.show();

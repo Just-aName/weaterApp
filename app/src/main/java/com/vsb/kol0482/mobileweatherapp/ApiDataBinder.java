@@ -39,7 +39,7 @@ public class ApiDataBinder {
                 return "windGust_mps";
             case "Vnitřní teplota":
                 return "inTemp_C";
-            case "Rážky za 24 hodin":
+            case "Srážky za 24 hodin":
                 return "rain24_mm";
             case "Směr větru":
                 return "windDir";

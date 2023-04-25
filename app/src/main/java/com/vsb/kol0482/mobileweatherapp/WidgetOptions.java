@@ -20,7 +20,7 @@ public enum WidgetOptions {
     HOURRAIN("Srážky za hodinu"),
     WINDGUST("Náraz větru"),
     INTEMP("Vnitřní teplota"),
-    RAIN24("Rážky za 24 hodin"),
+    RAIN24("Srážky za 24 hodin"),
     WINDDIRECTION("Směr větru"),
     WINDSPEED("Rychlost větru"),
     INHUMIDITY("Vnitřní vlhkost");
