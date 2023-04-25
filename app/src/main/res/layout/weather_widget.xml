@@ -164,12 +164,13 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-        <TextView
-            android:id="@+id/header_text1"
+
+        <ImageButton
+            android:id="@+id/header_button_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Poslední aktualizace:" />
+            android:src="@drawable/ic_refresh" />
 
         <TextView
             android:id="@+id/header_text2"
@@ -177,6 +178,13 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="23.04.2023 22:00" />
+
+        <ImageButton
+            android:id="@+id/header_button_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:src="@drawable/ic_settings" />
 
     </LinearLayout>
 
