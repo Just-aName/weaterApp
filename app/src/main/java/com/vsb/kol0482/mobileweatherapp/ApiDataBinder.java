@@ -250,7 +250,7 @@ public class ApiDataBinder {
             case RAIN24:
                 return "mm";
             case WINDDIRECTION:
-                return "windDir";
+                return "°";
             case WINDSPEED:
                 return "mps";
             case INHUMIDITY:
