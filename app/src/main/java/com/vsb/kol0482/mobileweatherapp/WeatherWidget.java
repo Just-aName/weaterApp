@@ -52,6 +52,12 @@ public class WeatherWidget extends AppWidgetProvider {
             PendingIntent pendingIntent5 = PendingIntent.getActivity(context, 5, settingIntent5, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setOnClickPendingIntent(R.id.header_button_2, pendingIntent5);
 
+            Intent widgetIntent = new Intent(context, WeatherWidget.class);
+            widgetIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            int[] ids = AppWidgetManager.getInstance(context).getAppWidgetIds(new ComponentName(context, WeatherWidget.class));
+            widgetIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+            PendingIntent pendingIntent6 = PendingIntent.getBroadcast(context, 6, widgetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            views.setOnClickPendingIntent(R.id.header_button_1, pendingIntent6);
 
             getWeatherInfo(context, new WeatherInfoCallback() {
                 @Override
