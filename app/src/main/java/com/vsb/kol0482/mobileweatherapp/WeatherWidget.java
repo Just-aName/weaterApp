@@ -159,6 +159,8 @@ public class WeatherWidget extends AppWidgetProvider {
 
                     appWidgetManager.updateAppWidget(appWidgetId, views);
                     } catch (JSONException e) {
+
+
                         Log.d("WIDGET", "Widget data parse load ERROR!");
                         e.printStackTrace();
                     }
@@ -168,7 +170,53 @@ public class WeatherWidget extends AppWidgetProvider {
                 public void onError(VolleyError error) {
                     // Handle the error
                     // ...
+                    // Update the text for each tile
+                    String leftUp = WidgetSettings.GetLeftUp();
+                    String rightUp = WidgetSettings.GetRightUp();
+                    String leftDown = WidgetSettings.GetLeftDown();
+                    String rightDown = WidgetSettings.GetRightDown();
+                    if(leftUp.equals(WidgetOptions.NONE.getValue()) || leftUp.equals(""))
+                    {
+                        views.setViewVisibility(R.id.tile1, View.GONE);
+                    }
+                    else {
+                        views.setViewVisibility(R.id.tile1, View.VISIBLE);
+                        views.setTextViewText(R.id.tile1_text, "Data load error");
+                        views.setTextViewText(R.id.tile1_title, leftUp);
+                    }
+
+                    if(rightUp.equals(WidgetOptions.NONE.getValue()) || rightUp.equals(""))
+                    {
+                        views.setViewVisibility(R.id.tile2, View.GONE);
+                    }
+                    else {
+                        views.setViewVisibility(R.id.tile2, View.VISIBLE);
+                        views.setTextViewText(R.id.tile2_text, "Data load error");
+                        views.setTextViewText(R.id.tile2_title, rightUp);
+                    }
+
+                    if(leftDown.equals(WidgetOptions.NONE.getValue()) || leftDown.equals(""))
+                    {
+                        views.setViewVisibility(R.id.tile3, View.GONE);
+                    }
+                    else {
+                        views.setViewVisibility(R.id.tile3, View.VISIBLE);
+                        views.setTextViewText(R.id.tile3_text, "Data load error");
+                        views.setTextViewText(R.id.tile3_title, leftDown);
+                    }
+
+                    if(rightDown.equals(WidgetOptions.NONE.getValue()) || rightDown.equals(""))
+                    {
+                        views.setViewVisibility(R.id.tile4, View.GONE);
+                    }
+                    else {
+                        views.setViewVisibility(R.id.tile4, View.VISIBLE);
+                        views.setTextViewText(R.id.tile4_text, "Data load error");
+                        views.setTextViewText(R.id.tile4_title, rightDown);
+                    }
+
                     Log.d("WIDGET", "Widget data load ERROR!");
+                    appWidgetManager.updateAppWidget(appWidgetId, views);
                     error.printStackTrace();
                 }
             });

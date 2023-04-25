@@ -47,7 +47,7 @@ public class GraphActivity extends AppCompatActivity {
 
         String selectedDate = getIntent().getStringExtra("SelectedDate");
         if(selectedDate == null || selectedDate.isEmpty()) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
             selectedDate = sdf.format(new Date());
         }
         datePickerButton.setText(selectedDate);
