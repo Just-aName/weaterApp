@@ -163,7 +163,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/second_tile2"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/border_gray"
         android:orientation="vertical"
         android:padding="16dp">
@@ -184,6 +187,48 @@
             android:layout_marginTop="8dp"
             android:spinnerMode="dropdown" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/second_tile4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/second_tile3"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_gray"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/menu_title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Widget obnovení každých:"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
+
+        <EditText
+            android:id="@+id/refresh_string_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="10"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/menu_title5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="minut"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical" />
     </LinearLayout>
 
 </RelativeLayout>

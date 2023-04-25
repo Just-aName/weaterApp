@@ -9,11 +9,13 @@ public class WidgetSettings {
     private static SharedPreferences.Editor editor;
 
     public static final String PREFS_NAME = "WidgetSettingsPrefs";
+    public static final String TOKEN = "";
     public static final String CONNECTION_STRING = "CONNECTION_STRING";
     public static final String LEFT_UP = "LEFT_UP";
     public static final String RIGHT_UP = "RIGHT_UP";
     public static final String LEFT_DOWN = "LEFT_DOWN";
     public static final String RIGHT_DOWN = "RIGHT_DOWN";
+    public static final String REFRESH_TIME = "REFRESH_TIME";
 
     public static void initWidgetSettings(Context context) {
         if (sharedPreferences == null) {
@@ -75,4 +77,21 @@ public class WidgetSettings {
         editor.putString(RIGHT_DOWN, input);
         editor.commit();
     }
+
+    public static String GetToken() { return sharedPreferences.getString(TOKEN, "");}
+
+    public static void SetToken(String input)
+    {
+        editor.putString(TOKEN, input);
+        editor.commit();
+    }
+
+    public  static Integer GetRefreshTime() { return sharedPreferences.getInt(REFRESH_TIME, 10);}
+
+    public static void SetRefreshTime(Integer value)
+    {
+        editor.putInt(REFRESH_TIME, value);
+        editor.commit();
+    }
+
 }

@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RemoteViews;
 import android.widget.Spinner;
@@ -79,6 +80,9 @@ public class Settings extends AppCompatActivity {
             spinner3.setSelection(0);
         else
             spinner3.setSelection(selectedPosition3);
+
+        EditText refreshStringInput = findViewById(R.id.refresh_string_input);
+        refreshStringInput.setText(String.valueOf(WidgetSettings.GetRefreshTime()));
     }
 
     public void exit(View v){
@@ -86,6 +90,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void save(View v){
+
         Spinner spinner0 = findViewById(R.id.menu_spinner0);
         String leftUp = spinner0.getSelectedItem().toString();
 
@@ -103,10 +108,25 @@ public class Settings extends AppCompatActivity {
         WidgetSettings.SetLeftDown(leftDown);
         WidgetSettings.SetRightDown(rightDown);
 
+        EditText refreshStringInput = findViewById(R.id.refresh_string_input);
+        String refreshString = refreshStringInput.getText().toString().trim();
+        int refreshInterval = 10;
+
+        try {
+            refreshInterval = Integer.parseInt(refreshString);
+        } catch (NumberFormatException e) {
+            // Výjimka nastala, protože uživatel nezadal platné číslo
+            // Zobrazíme upozornění
+            Toast.makeText(this, "Zadejte platné číslo pro obnovení", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        WidgetSettings.SetRefreshTime(refreshInterval);
+
         updateWidgets(this);
 
         finish();
-        Toast.makeText(this, "Aktivita byla ukončena.", Toast.LENGTH_SHORT).show(); // vypsání Toast hlášky
+        Toast.makeText(this, "Nastavení bylo uloženo.", Toast.LENGTH_SHORT).show(); // vypsání Toast hlášky
     }
 
     public static void updateWidgets(Context context) {
