@@ -34,6 +34,9 @@ public class Settings extends AppCompatActivity {
             stringOptions[i] = options[i].getValue();
         }
 
+        EditText connectionString = findViewById(R.id.connection_string_input);
+        connectionString.setText(WidgetSettings.GetConnectionString());
+
         Spinner spinner0 = findViewById(R.id.menu_spinner0);
         Spinner spinner1 = findViewById(R.id.menu_spinner1);
         Spinner spinner2 = findViewById(R.id.menu_spinner2);
@@ -90,6 +93,9 @@ public class Settings extends AppCompatActivity {
     }
 
     public void save(View v){
+
+        EditText connectionString = findViewById(R.id.connection_string_input);
+        WidgetSettings.SetConnectionString(connectionString.getText().toString());
 
         Spinner spinner0 = findViewById(R.id.menu_spinner0);
         String leftUp = spinner0.getSelectedItem().toString();
