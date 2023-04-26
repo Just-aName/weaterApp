@@ -162,9 +162,9 @@ public class MultipleDays extends AppCompatActivity {
 
             // porovnání dvou Date instancí pomocí metody compareTo()
             int compareResult = date1.compareTo(date2);
-            if (compareResult > 0) {
+            if (compareResult >= 0) {
                 //Data jsou různá a data v selectedDateFrom jsou větší než v selectedDateTo
-                Toast.makeText(MultipleDays.this, "Datum 'od' nemůže být větší než datum 'do'.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MultipleDays.this, "Datum 'od' nemůže být větší, nebo rovno datum 'do'.", Toast.LENGTH_SHORT).show();
                 return;
             }
 

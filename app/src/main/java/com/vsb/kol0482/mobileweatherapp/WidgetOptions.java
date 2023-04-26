@@ -34,5 +34,14 @@ public enum WidgetOptions {
     public String getValue() {
         return value;
     }
+
+    public static WidgetOptions fromValue(String value) {
+        for (WidgetOptions option : WidgetOptions.values()) {
+            if (option.getValue().equalsIgnoreCase(value)) {
+                return option;
+            }
+        }
+        return null;
+    }
 }
 
