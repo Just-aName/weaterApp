@@ -71,8 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void getWeatherInfo()
     {
-        String url = "http://10.0.2.2:8080/api/RawData/GetCurrent/2023-01-16";
-        //String url = "http://10.0.2.2:8080/api/RawData/GetCurrent";
+        String url = WidgetSettings.GetConnectionString() + "/api/RawData/GetCurrent";
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,

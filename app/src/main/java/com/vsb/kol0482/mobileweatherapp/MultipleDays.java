@@ -215,7 +215,7 @@ public class MultipleDays extends AppCompatActivity {
         }
 
 
-        String url = "http://10.0.2.2:8080/api/Avg/GetAvgPerDay/" + dateStringFrom + "/" + dateStringTo;
+        String url = WidgetSettings.GetConnectionString() + "/api/Avg/GetAvgPerDay/" + dateStringFrom + "/" + dateStringTo;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,

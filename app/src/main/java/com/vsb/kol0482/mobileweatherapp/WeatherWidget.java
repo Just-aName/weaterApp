@@ -248,7 +248,7 @@ public class WeatherWidget extends AppWidgetProvider {
 
     private void getWeatherInfo(Context context, final WeatherInfoCallback callback)
     {
-        String url = "http://10.0.2.2:8080/api/RawData/GetCurrent";
+        String url = WidgetSettings.GetConnectionString() + "/api/RawData/GetCurrent";
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,

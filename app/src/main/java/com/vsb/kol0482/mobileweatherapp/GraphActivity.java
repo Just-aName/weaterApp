@@ -151,7 +151,7 @@ public class GraphActivity extends AppCompatActivity {
         }
 
 
-        String url = "http://10.0.2.2:8080/api/Avg/GetAvgPerHourForDate/" + dateString;
+        String url = WidgetSettings.GetConnectionString() + "/api/Avg/GetAvgPerHourForDate/" + dateString;
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,
