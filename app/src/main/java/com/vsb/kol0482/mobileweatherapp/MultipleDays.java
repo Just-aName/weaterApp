@@ -3,6 +3,7 @@ package com.vsb.kol0482.mobileweatherapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,12 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
@@ -21,6 +28,9 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +43,7 @@ import java.util.concurrent.TimeUnit;
 public class MultipleDays extends AppCompatActivity {
     String selectedDateFrom;
     String selectedDateTo;
+    String selectedUnit;
     long daysBetween;
 
     @Override
@@ -40,7 +51,7 @@ public class MultipleDays extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiple_days);
 
-        String selectedUnit = getIntent().getStringExtra("SelectedUnit");
+        selectedUnit = getIntent().getStringExtra("SelectedUnit");
         TextView headerText = findViewById(R.id.title_multiple);
         headerText.setText(selectedUnit);
 
@@ -68,40 +79,19 @@ public class MultipleDays extends AppCompatActivity {
         datePickerButton1.setText(selectedDateFrom);
         datePickerButton2.setText(selectedDateTo);
 
-
-
-        LineChart lineChart = findViewById(R.id.line_chart_multiple);
-
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(getXValue("2023-04-20 02:11"), 4));
-        entries.add(new Entry(getXValue("2023-04-21 03:12"), 2));
-        entries.add(new Entry(getXValue("2023-04-22 04:16"), 6));
-        entries.add(new Entry(getXValue("2023-04-23 15:18"), 8));
-
-        LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
-        dataSet.setColor(Color.RED);
-        dataSet.setValueTextColor(Color.BLUE);
-
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
-
-        Description description = new Description();
-        description.setText("My chart");
-        lineChart.setDescription(description);
-
-// configure x-axis formatter
-        final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM HH:mm", Locale.getDefault());
-        IAxisValueFormatter xAxisFormatter = new IAxisValueFormatter() {
+        getData(this, new WeatherDataCallback() {
             @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return sdf.format(new Date((long) value));
+            public void onSuccess(JSONArray data)
+            {
+                createChart(data);
             }
-        };
-        XAxis xAxis = lineChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new MultipleDays.MyXAxisValueFormatter(xAxisFormatter));
 
-        lineChart.invalidate(); // refresh
+            @Override
+            public void onError(VolleyError error) {
+                Toast.makeText(MultipleDays.this, "Problém s načtením dat.", Toast.LENGTH_LONG).show();
+                Log.d("GRAPH", "Graph data load ERROR!");
+            }
+        });
     }
 
     private void showDatePickerDialog(Button datePickerButton, boolean from) {
@@ -133,7 +123,7 @@ public class MultipleDays extends AppCompatActivity {
     // helper method to convert date string to x value
     private long getXValue(String dateString) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             Date date = sdf.parse(dateString);
             return date.getTime();
         } catch (ParseException e) {
@@ -168,6 +158,19 @@ public class MultipleDays extends AppCompatActivity {
                 return;
             }
 
+            getData(this, new WeatherDataCallback() {
+                @Override
+                public void onSuccess(JSONArray data)
+                {
+                    createChart(data);
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    Toast.makeText(MultipleDays.this, "Problém s načtením dat.", Toast.LENGTH_LONG).show();
+                    Log.d("GRAPH", "Graph data load ERROR!");
+                }
+            });
 
         } catch (ParseException e) {
             // zachycení výjimky a vypsání chybové zprávy
@@ -189,6 +192,132 @@ public class MultipleDays extends AppCompatActivity {
 
     public void loadMaxGraph(View view) {
         Toast.makeText(MultipleDays.this, "Max graph", Toast.LENGTH_SHORT).show();
+    }
+
+    private void getData(Context context, final WeatherDataCallback callback)
+    {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        // převod řetězce na datum pomocí inputFormat
+        String dateStringFrom;
+        String dateStringTo;
+        try {
+            Date dateFrom = inputFormat.parse(selectedDateFrom);
+            dateStringFrom = outputFormat.format(dateFrom);
+            Date dateTo = inputFormat.parse(selectedDateTo);
+            dateStringTo = outputFormat.format(dateTo);
+
+        } catch (ParseException e) {
+            Toast.makeText(MultipleDays.this, "Problém s načtením dat.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+            return;
+        }
+
+
+        String url = "http://10.0.2.2:8080/api/Avg/GetAvgPerDay/" + dateStringFrom + "/" + dateStringTo;
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                new Response.Listener<JSONArray>(){
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        callback.onSuccess(response);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("WIDGET", "Widget data load ERROR!");
+                callback.onError(error);
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    private void createChart(JSONArray data)
+    {
+        LineChart lineChart = findViewById(R.id.line_chart_multiple);
+        if(data.length() == 0)
+            Toast.makeText(MultipleDays.this, "Pro tyto deny nejsou naměřeny žádné hodnoty.", Toast.LENGTH_LONG).show();
+
+        ArrayList<Entry> entries = new ArrayList<>();
+        float min = Float.POSITIVE_INFINITY;
+        float max = Float.NEGATIVE_INFINITY;
+        float avg = 0;
+        try
+        {
+            for(int i=0;i<data.length();i++){
+                JSONObject jData = data.getJSONObject(i);
+                String time = jData.getString("time");
+                String value = jData.getString(ApiDataBinder.GetApiVersion(selectedUnit));
+                float val = Float.parseFloat(value);
+                if(val < min)
+                    min = val;
+                if(val > max)
+                    max = val;
+                avg = avg + val;
+                entries.add(new Entry(getXValue(time), val));
+            }
+            if(data.length() != 0)
+                avg = Math.round(avg / data.length() * 10) / 10f;
+        }catch (Exception e)
+        {
+            Toast.makeText(MultipleDays.this, "Problém s parsovanim dat.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        TextView field1 = findViewById(R.id.field1_value_multiple);
+        TextView field2 = findViewById(R.id.field2_value_multiple);
+        TextView field3 = findViewById(R.id.field3_value_multiple);
+
+        WidgetOptions tmpUnit = WidgetOptions.fromValue(selectedUnit);
+        if(tmpUnit != null) {
+            String finStr1 = String.format(Locale.ENGLISH, "%.1f", min) + " " + ApiDataBinder.GetUnitBaseOnEnum(tmpUnit);
+            String finStr2 = String.format(Locale.ENGLISH, "%.1f", avg) + " " + ApiDataBinder.GetUnitBaseOnEnum(tmpUnit);
+            String finStr3 = String.format(Locale.ENGLISH, "%.1f", max) + " " + ApiDataBinder.GetUnitBaseOnEnum(tmpUnit);
+            field1.setText(finStr1);
+            field2.setText(finStr2);
+            field3.setText(finStr3);
+        }
+        else
+        {
+            field1.setText(String.format(Locale.ENGLISH, "%.1f", min));
+            field2.setText(String.format(Locale.ENGLISH, "%.1f", avg));
+            field3.setText(String.format(Locale.ENGLISH, "%.1f", max));
+        }
+        LineDataSet dataSet = new LineDataSet(entries, selectedUnit); // add entries to dataset
+        dataSet.setColor(Color.RED);
+        dataSet.setValueTextColor(Color.BLUE);
+
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+
+
+        if(tmpUnit != null) {
+            Description description = new Description();
+            String unit = ApiDataBinder.GetUnitBaseOnEnum(tmpUnit);
+            description.setText(unit);
+            lineChart.setDescription(description);
+        }
+
+// configure x-axis formatter
+        final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM HH:mm", Locale.getDefault());
+        IAxisValueFormatter xAxisFormatter = new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                return sdf.format(new Date((long) value));
+            }
+        };
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setValueFormatter(new MultipleDays.MyXAxisValueFormatter(xAxisFormatter));
+        xAxis.setLabelRotationAngle(45f);
+
+        lineChart.setExtraOffsets(0f,0f,0f,30f);
+        lineChart.invalidate(); // refresh
     }
 
     class MyXAxisValueFormatter extends ValueFormatter {

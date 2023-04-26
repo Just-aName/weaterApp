@@ -250,7 +250,9 @@ public class GraphActivity extends AppCompatActivity {
         XAxis xAxis = lineChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new MyXAxisValueFormatter(xAxisFormatter));
+        xAxis.setLabelRotationAngle(45f);
 
+        lineChart.setExtraOffsets(0f,0f,0f,30f);
         lineChart.invalidate(); // refresh
     }
 

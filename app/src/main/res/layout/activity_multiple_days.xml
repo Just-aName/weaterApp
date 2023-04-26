@@ -136,7 +136,7 @@
                 android:padding="8dp"/>
 
             <TextView
-                android:id="@+id/field1_value"
+                android:id="@+id/field1_value_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Value 1"
@@ -171,7 +171,7 @@
                 android:padding="8dp"/>
 
             <TextView
-                android:id="@+id/field2_value"
+                android:id="@+id/field2_value_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Value 2"
@@ -204,7 +204,7 @@
                 android:padding="8dp"/>
 
             <TextView
-                android:id="@+id/field3_value"
+                android:id="@+id/field3_value_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Value 3"
