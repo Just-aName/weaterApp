@@ -18,11 +18,11 @@ public enum WidgetOptionsUnits {
     MAXSOLARRAD("W/m^2"),
     HUMIDITYINDEX("°C"),
     HOURRAIN("mm"),
-    WINDGUST("mps"),
+    WINDGUST("m/s"),
     INTEMP("°C"),
     RAIN24("mm"),
     WINDDIRECTION("°"),
-    WINDSPEED("mps"),
+    WINDSPEED("m/s"),
     INHUMIDITY("%");
 
     private String value;

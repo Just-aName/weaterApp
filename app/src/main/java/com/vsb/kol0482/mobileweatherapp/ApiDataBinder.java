@@ -244,7 +244,7 @@ public class ApiDataBinder {
             case HOURRAIN:
                 return "mm";
             case WINDGUST:
-                return "mps";
+                return "m/s";
             case INTEMP:
                 return "°C";
             case RAIN24:
@@ -252,7 +252,7 @@ public class ApiDataBinder {
             case WINDDIRECTION:
                 return "°";
             case WINDSPEED:
-                return "mps";
+                return "m/s";
             case INHUMIDITY:
                 return "%";
             default:
