@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ public class MultipleDays extends AppCompatActivity {
     String selectedDateTo;
     String selectedUnit;
     long daysBetween;
+    int valueType = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class MultipleDays extends AppCompatActivity {
         selectedDateTo = getIntent().getStringExtra("SelectedDateTo");
         daysBetween = getIntent().getLongExtra("DaysBetween", 0);
 
+        LinearLayout avgLabel = findViewById(R.id.label_avg_value);
+        avgLabel.setBackgroundResource(R.drawable.border_selected);
 
         Button datePickerButton1 = findViewById(R.id.date_picker_button_multiple3);
         datePickerButton1.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +83,7 @@ public class MultipleDays extends AppCompatActivity {
         datePickerButton1.setText(selectedDateFrom);
         datePickerButton2.setText(selectedDateTo);
 
-        getData(this, new WeatherDataCallback() {
+        getData(this, valueType,new WeatherDataCallback() {
             @Override
             public void onSuccess(JSONArray data)
             {
@@ -158,7 +162,7 @@ public class MultipleDays extends AppCompatActivity {
                 return;
             }
 
-            getData(this, new WeatherDataCallback() {
+            getData(this, valueType,new WeatherDataCallback() {
                 @Override
                 public void onSuccess(JSONArray data)
                 {
@@ -181,20 +185,56 @@ public class MultipleDays extends AppCompatActivity {
     }
 
     public void loadMinGraph(View view) {
-        Toast.makeText(MultipleDays.this, "Min graph", Toast.LENGTH_SHORT).show();
+        if(valueType == 1)
+        {
+            LinearLayout maxLabel = findViewById(R.id.label_max_value);
+            maxLabel.setBackgroundResource(R.drawable.border_black);
+        }
+        else if (valueType == 0)
+        {
+            LinearLayout avgLabel = findViewById(R.id.label_avg_value);
+            avgLabel.setBackgroundResource(R.drawable.border_black);
+        }
 
+        valueType = 2;
+        LinearLayout minLabel = findViewById(R.id.label_min_value);
+        minLabel.setBackgroundResource(R.drawable.border_selected);
     }
 
     public void loadAvgGraph(View view) {
-        Toast.makeText(MultipleDays.this, "Avg graph", Toast.LENGTH_SHORT).show();
-
+        if(valueType == 1)
+        {
+            LinearLayout maxLabel = findViewById(R.id.label_max_value);
+            maxLabel.setBackgroundResource(R.drawable.border_black);
+        }
+        else if (valueType == 2)
+        {
+            LinearLayout minLabel = findViewById(R.id.label_min_value);
+            minLabel.setBackgroundResource(R.drawable.border_black);
+        }
+        valueType = 0;
+        LinearLayout avgLabel = findViewById(R.id.label_avg_value);
+        avgLabel.setBackgroundResource(R.drawable.border_selected);
     }
 
     public void loadMaxGraph(View view) {
-        Toast.makeText(MultipleDays.this, "Max graph", Toast.LENGTH_SHORT).show();
+        if(valueType == 0)
+        {
+            LinearLayout avgLabel = findViewById(R.id.label_avg_value);
+            avgLabel.setBackgroundResource(R.drawable.border_black);
+        }
+        else if (valueType == 2)
+        {
+            LinearLayout minLabel = findViewById(R.id.label_min_value);
+            minLabel.setBackgroundResource(R.drawable.border_black);
+        }
+
+        valueType = 1;
+        LinearLayout maxLabel = findViewById(R.id.label_max_value);
+        maxLabel.setBackgroundResource(R.drawable.border_selected);
     }
 
-    private void getData(Context context, final WeatherDataCallback callback)
+    private void getData(Context context, int valType, final WeatherDataCallback callback)
     {
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -215,7 +255,14 @@ public class MultipleDays extends AppCompatActivity {
         }
 
 
-        String url = WidgetSettings.GetConnectionString() + "/api/Avg/GetAvgPerDay/" + dateStringFrom + "/" + dateStringTo;
+        String url;
+        if(valType == 1)
+            url = WidgetSettings.GetConnectionString() + "/api/Max/GetMaxPerDay/" + dateStringFrom + "/" + dateStringTo;
+        else if (valType == 2)
+            url = WidgetSettings.GetConnectionString() + "/api/Min/GetMinPerDay/" + dateStringFrom + "/" + dateStringTo;
+        else
+            url = WidgetSettings.GetConnectionString() + "/api/Avg/GetAvgPerDay/" + dateStringFrom + "/" + dateStringTo;
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         JsonArrayRequest jsonObjectRequest = new JsonArrayRequest(Request.Method.GET, url,
