@@ -39,7 +39,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 interface WeatherDataCallback {
     void onSuccess(JSONArray data);
@@ -168,7 +170,14 @@ public class GraphActivity extends AppCompatActivity {
                 Log.d("WIDGET", "Widget data load ERROR!");
                 callback.onError(error);
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + WidgetSettings.GetToken());
+                return headers;
+            }
+        };
 
         requestQueue.add(jsonObjectRequest);
     }

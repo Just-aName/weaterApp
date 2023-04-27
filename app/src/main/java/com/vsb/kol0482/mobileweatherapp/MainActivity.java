@@ -36,6 +36,8 @@ import org.json.JSONObject;
 
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         weatherRV.setAdapter(weatherRVAdapter);
         backIV.setImageResource(R.drawable.mainactivitybackground);
         Intent intent = new Intent(MainActivity.this, Login.class);
-        if(WidgetSettings.GetConnectionString().equals("")) {
+        if(WidgetSettings.GetConnectionString().equals("") || WidgetSettings.GetToken().equals("")) {
             startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
         }
         else {
@@ -126,7 +128,14 @@ public class MainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity.this, "Api request Error", Toast.LENGTH_SHORT).show();
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + WidgetSettings.GetToken());
+                return headers;
+            }
+        };
 
         requestQueue.add(jsonObjectRequest);
     }
@@ -147,6 +156,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.item3:
                 startActivity(new Intent(MainActivity.this, MultipleMenu.class));
+                return true;
+            case R.id.item4:
+                WidgetSettings.SetToken("");
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
                 return true;
             default:
                 return false;

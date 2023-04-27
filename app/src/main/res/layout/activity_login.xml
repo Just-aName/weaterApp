@@ -6,6 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".Login">
 
+    <TextView
+        android:id="@+id/textView3Login2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Uživatelské jméno:"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.207"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="289dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="360dp"
+        android:ems="10"
+        android:hint="Zde napište uživatelské jméno"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:layout_constraintVertical_bias="0.8" />
+
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="290dp"
@@ -15,10 +42,10 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -43,7 +70,7 @@
         app:layout_constraintHorizontal_bias="0.194"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLogin"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView3Login"
@@ -56,8 +83,7 @@
         app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.0"
-        android:visibility="gone"/>
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
@@ -68,11 +94,9 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintVertical_bias="0.173"
-        android:visibility="gone"/>
+        app:layout_constraintVertical_bias="0.32" />
 
     <Button
         android:id="@+id/buttonLogin"

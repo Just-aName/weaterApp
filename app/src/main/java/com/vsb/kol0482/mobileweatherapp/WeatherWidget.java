@@ -31,6 +31,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Implementation of App Widget functionality.
@@ -269,7 +271,14 @@ public class WeatherWidget extends AppWidgetProvider {
                 Log.d("WIDGET", "Widget data load ERROR!");
                 callback.onError(error);
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + WidgetSettings.GetToken());
+                return headers;
+            }
+        };
 
         requestQueue.add(jsonObjectRequest);
     }
