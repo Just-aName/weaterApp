@@ -29,7 +29,6 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.textfield.TextInputEditText;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView backIV;
     private ArrayList<WeatherRVModal> weatherRVModalArrayList;
     private WeatherRVAdapter weatherRVAdapter;
+    private static final int SECOND_ACTIVITY_REQUEST_CODE = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,14 @@ public class MainActivity extends AppCompatActivity {
         weatherRVModalArrayList = new ArrayList<>();
         weatherRVAdapter = new WeatherRVAdapter(this, weatherRVModalArrayList);
         weatherRV.setAdapter(weatherRVAdapter);
-        getWeatherInfo();
+        backIV.setImageResource(R.drawable.mainactivitybackground);
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        if(WidgetSettings.GetConnectionString().equals("")) {
+            startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE);
+        }
+        else {
+            getWeatherInfo();
+        }
     }
 
     private void getWeatherInfo()
@@ -86,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject data = response.getJSONObject(0);
                     String temperature = data.getString("outTemp_C");
                     temperatureTV.setText(temperature + "°C");
-                    Picasso.get().load("https://images.unsplash.com/photo-1605776502818-8d2103f63a25?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=683&q=80").into(backIV);
                     WidgetOptions[] options = WidgetOptions.values();
                     for (int j = 0; j < options.length; j++) {
                         String apiDataName = ApiDataBinder.GetApiVersionFromEnum(options[j]);
@@ -143,6 +150,20 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check which request we're responding to
+        if (requestCode == SECOND_ACTIVITY_REQUEST_CODE) {
+            // Make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                // Do something with the data returned from the second activity
+                getWeatherInfo();
+            }
         }
     }
 }
